@@ -1,0 +1,191 @@
+                 <!-- Toast container -->
+<div aria-live="polite" aria-atomic="true" style="position: fixed; top: 20px; right: 20px; z-index: 1050;">
+    <!-- Position it -->
+    <div style="background-color: rgb(36, 243, 71);">
+        <!-- Then put toasts within -->
+        <div class="toast" id="cartToast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="2000">
+            <div class="toast-header">
+                <strong class="me-auto">Cart</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Item added to cart!
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- page section start -->
+    <div class="page-section section pt-100">
+        <div class="container-fluid">
+            <div class="row mb-40">
+                <!-- QuickView Product Images -->
+                <div class="col-xl-5 col-md-6 col-12 mb-40">	
+                    <!-- Tab panes -->
+                    <div class="tab-content product-details-large mb-10">
+                        <% if(data[0].image && data[0].image.length > 0) { %>
+                            <% data[0].image.forEach((item, index) => { %>
+                                <div class="pro-large-img tab-pane <%= index === 0 ? 'active' : '' %>" id="pro-large-img-<%= index + 1 %>">
+                                    <img src="<%= item %>" height="450px" alt="" />
+                                </div>
+                            <% }) %>
+                        <% } %>
+                    </div>
+                    <!-- QuickView Product Thumbnail Slider -->
+                    <div class="pro-thumb-img-slider nav">
+                        <% if(data[0].image && data[0].image.length > 0) { %>
+                            <% data[0].image.forEach((item, index) => { %>
+                                <li class="<%= index === 0 ? 'active' : '' %>">
+                                    <div>
+                                        <a href="#pro-large-img-<%= index + 1 %>" data-bs-toggle="tab"><img src="<%= item %>" height="95px"   alt="" /></a>
+                                    </div>
+                                </li>
+                            <% }) %>
+                        <% } %>
+                     </div>
+                </div>
+                <!-- QuickView Product Details -->
+                <div class="col-xl-7 col-md-6 col-12 mb-40">
+                    <div class="product-details section">
+                        <!-- Title -->
+                        <h1 class="title"><%=data[0].name%></h1>
+                        <!-- Price Ratting -->
+                        <div class="price-ratting section">
+                            <!-- Price -->
+                            <span class="price float-left"><span class="new">₹ <%=data[0].price%>.00</span></span>
+                            <!-- Ratting -->
+                           
+                        </div>
+                        <!-- Short Description -->
+                        <div class="short-desc section">
+                            <h5 class="pd-sub-title">Quick Overview</h5>
+                            <p><%=data[0].description%></p>
+                        </div>
+                        <!-- Product Size -->
+                        <div class="product-size section">
+                            <h5 class="pd-sub-title">Select Size</h5>
+                            <% if(data[0].size && data[0].size.length > 0) { %>
+                                <% data[0].size.forEach((item, index) => { %>
+                                    <button id="size-<%=item%>" class="<%= index === 0 ? 'active' : '' %>"><%=item%></button>
+                                <% }) %>
+                            <% } %>
+                        </div>
+                        
+                        <!-- Product Color -->
+                        <!-- <div class="color-list section">
+                            <h5 class="pd-sub-title">Select Color</h5>
+                            <button class="active" style="background-color: #51bd99;"><i class="fa fa-check"></i></button>
+                            <button style="background-color: #ff7a5f;"><i class="fa fa-check"></i></button>
+                            <button style="background-color: #baa6c2;"><i class="fa fa-check"></i></button>
+                            <button style="background-color: #414141;"><i class="fa fa-check"></i></button>
+                        </div> -->
+                        <!-- Quantity Cart -->
+                        <div class="quantity-cart section">
+                            <div class="product-quantity2">
+                                <input type="text" value="1" min="1"  class="product-quantity">
+                            </div>
+                            <button class="add-to-cart">add to cart</button>
+                        </div>
+            
+                   
+                    </div>
+                </div>
+            </div>
+         
+        </div>
+
+
+    </div>
+    <!-- page section end -->
+    <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('.product-size button');
+
+    // Add click event listener to each button
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to the clicked button
+            button.classList.add('active');
+        });
+    });
+
+    // Set the first button as active by default if there are any buttons
+    if (buttons.length > 0) {
+        buttons[0].classList.add('active');
+    }
+
+    // Prevent quantity from being less than 1
+    const quantityInput = document.querySelector('.product-quantity');
+    quantityInput.addEventListener('input', function () {
+        if (this.value < 1) {
+            this.value = 1;
+        }
+    });
+
+    // Function to add a product to the cart
+    function addToCart(product) {
+        // Check if there are existing items in the cart
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        
+        // Check if the product already exists in the cart
+        let existingProductIndex = cart.findIndex(item => item.name === product.name && item.size === product.size);
+
+        if (existingProductIndex !== -1) {
+            // If the product exists, update its quantity
+            cart[existingProductIndex].quantity += product.quantity;
+        } else {
+            // If the product doesn't exist, add it to the cart
+            cart.push(product);
+        }
+
+        // Update the cart in localStorage
+        localStorage.setItem('cart', JSON.stringify(cart));
+
+        // Show the toast message
+        showCartToast();
+    }
+
+    // Function to show the toast message
+    function showCartToast() {
+        let toastEl = document.getElementById('cartToast');
+        let toast = new bootstrap.Toast(toastEl);
+        toast.show();
+    }
+
+    // Event listener for the "add to cart" button
+    document.querySelector('.add-to-cart').addEventListener('click', function () {
+        // Get the product details
+        let productName = '<%=data[0].name%>';
+        let productPrice = '<%=data[0].price%>';
+        let productcode = '<%=data[0].code%>';
+        let productimage = '<%=data[0].image[0]%>';
+        let productQuantity = parseInt(quantityInput.value);
+        let selectedSize = ''; // Initialize selected size
+
+        // Loop through each size button to find the selected size
+        document.querySelectorAll('.product-size button').forEach(function (button) {
+            if (button.classList.contains('active')) {
+                selectedSize = button.textContent; // Get the text content of the selected button
+            }
+        });
+
+        // Create a product object
+        let product = {
+            name: productName,
+            price: productPrice,
+            quantity: productQuantity,
+            code:productcode,
+            image:productimage,
+            size: selectedSize // Add the selected size to the product object
+        };
+
+        // Add the product to the cart
+        addToCart(product);
+    });
+});
+
+
+    </script>

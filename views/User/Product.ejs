@@ -1,0 +1,76 @@
+ <!-- shop area start -->
+ <div class="shop-area ptb-90">
+    <div class="container-fluid">
+        <div class="section-title text-center">
+            <% if(categoryname) {%>
+                <h3><%= categoryname %></h3>
+            <%}else{%>
+                <h3>No Products Available in this Catgeory</h3>
+                <%}%>
+            <!-- <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p> -->
+        </div>		
+        <div class="shop-style-all">
+                <div class="grid row">
+                    <% for (let i = 0; i < data.length; i++) { %>
+                        <% let item = data[i]; %>
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-12 grid-item cat1">
+                        <div class="shop hover-style mb-30">
+                            <div class="shop-img">
+                                <div class="shop-single-img">
+                                    <a href="/<%=item.code%>">
+                                        <img src="<%=item.image[0]%>" alt="" style="height: 285px;width: 250px;" />
+                                    </a>
+                                    <!-- <div class="product-cart-3">
+                                        <a href="#"><i class="pe-7s-cart"></i></a>
+                                        <a href="#" data-bs-toggle="modal" data-bs-target="#productModal"><i class="pe-7s-look"></i></a>
+                                    </div> -->
+                                </div>								
+                                <div class="title-style-3 text-center">
+                                    <h3><a href="#"><%= item.name%></a></h3>
+                                    <span class="new-price">₹. <%= item.price%></span>
+                                    <span class="old-price">₹. <%= item.mrp %></span>
+                                </div>
+                            </div>							
+                        </div>
+                    </div>
+                    <%}%>
+                 
+                </div>
+        </div>
+       
+    </div>
+</div>			
+<!-- shop area end -->
+
+<% for (let i = 0; i < data.length; i++) {%>
+    <% let item = data[i] %>
+   <!-- Modal -->
+<div class="modal fade" id="productModal" tabindex="-1" role="dialog">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+    </div>
+    <div class="modal-body">
+        <div class="modal-img">
+            <a href="/<%=item.code%>"><img src="<%= item.image[0] %>"  height="350px" alt="" /></a>
+        </div>
+        <div class="modal-pro-content">
+            <h3><a href="/<%=item.code%>"><%=item.name%></a></h3>
+           
+            <div class="price">
+                <span>₹. <%=item.price%></span>
+                <span class="old">₹. <%=item.mrp%></span>
+            </div>
+            <p><%=item.description%></p>	
+                <!-- <input type="number" value="1" /> -->
+                <a class="btn btn-primary" href="/<%=item.code%>">Add to cart</a>
+           
+          
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<!-- Modal end -->
+<%}%>

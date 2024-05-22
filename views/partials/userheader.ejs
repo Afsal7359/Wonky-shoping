@@ -1,0 +1,85 @@
+
+<header style="border-bottom: 1px solid #000; background-color: #000;">
+    <div class="header-area home-2 clearfix ">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-4">
+                    <div class="logo">
+                        <a href="/"><img src="assets2/images/bonky/logo.jpg"  height="95px" alt=""></a>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-4 col-2 text-center">
+                    <div class="main-menu display-inline">
+                        <nav>
+                            <ul class="menu">
+                                <li class="me-5"><a href="/"> <p  style="font-weight: 900;color: #fff;">HOME</p> </a>  </li>
+                                <li class="me-5"><a href="/shop"> <p  style="font-weight: 900;color: #fff;">SHOP</p> </a>  </li>
+                                <li class="me-5"><a href="/contact"> <p  style="font-weight: 900;color: #fff;">CONTACT</p> </a>  </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-6 text-right text-sm text-res ">
+                    <div class="cart-user-language">
+                        <div class="shopping-cart ml-30 display-inline">
+                            <a class="top-cart" href="/cart"><i class="pe-7s-cart" style="color: #fff;"></i></a>
+                           						
+                        </div>
+                        <div class="user">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="pe-7s-add-user" style="color: #fff;"></i></a>
+                        </div>
+                        <div class="search-block-top display-inline">
+                            <div class="icon-search">
+                                <a href="#"><i class="pe-7s-search" style="color: #fff;"></i></i></a>
+                            </div>
+                            <div class="toogle-content">
+                                <form action="#" id="searchbox">
+                                    <input type="text" placeholder="Search" />
+                                    <button class="button-search" ><i class="pe-7s-search" ></i></button>
+                                </form>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mobile-menu" ></div>
+        </div>
+    </div>
+</header>
+
+
+<!-- loginModal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="login">
+                    <div class="login-form-container">
+                        <div class="login-text">
+                            <h2>login</h2>
+                            <span>Please login using account detail bellow.</span>
+                        </div>
+                        <div class="login-form">
+                            <form action="#" method="post">
+                                <input type="text" name="user-name" placeholder="Username">
+                                <input type="password" name="user-password" placeholder="Password">
+                                <div class="button-box">
+                                    <div class="login-toggle-btn">
+                                        <input type="checkbox" id="remember">
+                                        <label for="remember">Remember me</label>
+                                        <a href="#">Forgot Password?</a>
+                                    </div>
+                                    <button type="submit" class="default-btn floatright">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- loginModal end -->

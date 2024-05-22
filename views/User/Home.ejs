@@ -1,0 +1,124 @@
+<div class="slider-area text-center mt-2">
+    <div class="container-fluid">
+        <div class="slider-active">
+            <% if(BannerData){%>
+
+                <% for (let i = 0; i < BannerData.length; i++){%>
+                    <% let item = BannerData[i]; %>
+            <div class="single-slider slider-opacity ptb-250 gray-2-bg" style="background-image: url(<%=item.image%>);">
+                <div class="slider-text" style="background-color: rgba(255, 255, 255, 0.5); padding: 20px; border-radius: 45px;">
+                    <h2 style="opacity: 0.9;"><%=item.heading%></h2>
+                    <h3 style="opacity: 0.9;"><%=item.description%></h3>
+                    <a href="/shop" style="opacity: 0.9;">Shop The Collection</a>
+                </div>
+            </div>
+         
+            <%}%>
+          <%}else{%>
+            <div class="single-slider slider-opacity ptb-250 gray-2-bg" style="background-image: url(assets/images/bonky/11.jpg);">
+                <div class="slider-text" style="background-color: rgba(255, 255, 255, 0.5); padding: 20px; border-radius: 45px;">
+                    <h2 style="opacity: 0.9;">Banner Heading</h2>
+                    <h3 style="opacity: 0.9;">A good looking, comfortable traditional collection</h3>
+                    <a href="/shop" style="opacity: 0.9;">Shop The Collection</a>
+                </div>
+            </div>
+            <%}%>
+         </div>
+
+
+        <!-- banner area start -->
+        <div class="banner-area pb-70 mt-5">
+            <div class="container-fluid">
+                <div class="row">
+                     <% for (let j = 0; j < FashionData.length; j++){%>
+                        <% let fashion = FashionData[j]; %>
+                    <div class="col-lg-4 col-md-4">
+                        <div class="single-banner mb-30">
+                            <a href="#"><img src="<%=fashion.image%>" style="height: 300px; width: 300px;" alt=""></a>
+                            <div class="single-banner-title">
+                                <h3><%=fashion.heading%></h3>
+                                <a href="/shop">shop now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <%}%>
+                </div>
+            </div>
+        </div>
+        <!-- banner area end -->
+
+
+         <!-- shop area start -->
+         <div class="shop-area ptb-90">
+            <div class="container-fluid">
+                <div class="section-title text-center">
+                    <h3>Featured Collections</h3>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                </div>		
+                <div class="shop-style-all">
+                        <div class="grid row">
+                            <% for (let i = 0; i< ProductData.length; i++){%>
+                                <% let item = ProductData[i]%>
+                            <div class="col-lg-3 col-md-6 col-sm-6 col-12 grid-item cat1">
+                                <div class="shop hover-style mb-30">
+                                    <div class="shop-img">
+                                        <div class="shop-single-img">
+                                            <a href="/<%=item.code%>">
+                                                <img src="<%= item.image[0] %>" alt="" style="height: 285px;width: 250px;" />
+                                            </a>
+                                            <!-- <div class="product-cart-3">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#productModal<%=i%>"><i class="pe-7s-look"></i></a>
+                                            </div> -->
+                                        </div>								
+                                        <div class="title-style-3 text-center">
+                                            <h3><a href="#"><%=item.name%></a></h3>
+                                            <span class="new-price">₹. <%=item.price%></span>
+                                            <span class="old-price">₹. <%=item.mrp%></span>
+                                        </div>
+                                    </div>							
+                                </div>
+                            </div>
+                           <%}%>
+                        </div>
+                </div>
+                <div class="view-more text-center mt-30">
+                    <a href="/shop">view more</a>
+                </div>
+            </div>
+        </div>			
+        <!-- shop area end -->
+
+
+          <!-- blog area start -->
+          <div class="blog-area pb-70">
+            <div class="container-fluid">
+                <div class="section-title text-center mb-50">
+                    <h3>New Offers</h3>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                </div>
+                <div class="row">
+                    <% for(let i = 0; i < OfferData.length; i++){%>
+                        <% let item = OfferData[i]; %>
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="single-blog mb-30">
+                            <a href="/shop">
+                                <img src="<%=item.image%>" height="285px" width="90%" alt="">
+                            </a>
+                            <div class="blog-title">
+                                <span><%=item.heading%></span>
+                                <h3><a href="/shop"><%=item.description%></a></h3>
+                                <a href="/shop">read more</a>
+                            </div>
+                        </div>
+                    </div>
+                   <%}%>
+                </div>	
+            </div>
+        </div>
+        <!-- blog area end -->
+
+
+   
+
+
+            

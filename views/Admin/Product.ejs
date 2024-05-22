@@ -1,0 +1,336 @@
+<div class="page">
+    <div class="page-main">
+
+        
+
+      
+
+        <!--app-content open-->
+        <div class="app-content main-content mt-0">
+            <div class="side-app">
+
+                <!-- CONTAINER -->
+                <div class="main-container container-fluid">
+
+                        
+                    <!-- PAGE-HEADER -->
+                    <div class="page-header">
+                        <div>
+                            <h1 class="page-title">Product Page</h1>
+                        </div>
+                        <div class="ms-auto pageheader-btn">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">Product Page</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Add Products</li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!-- PAGE-HEADER END -->
+
+                   
+                   
+
+                   
+
+                    <!-- row -->
+<div class="row">
+    <div class="col-lg-6 col-md-6">
+        <div class="card">
+            <div class="card-header border-bottom">
+                <h3 class="card-title">Add Products</h3>
+            </div>
+            <div class="card-body">
+                <p class="text-muted"></p>
+                <!-- Check if there are less than 3 banners before enabling the "Add" button -->
+          
+                <a href="#" class="btn btn-primary" data-bs-target="#modaldemo1" data-bs-toggle="modal">
+                    Add
+                </a>
+               
+                <!-- Display a message or modal to inform the user that they can't add more banners -->
+                <!-- <p style="color: red;">You have reached the maximum item limit. If you want to add more items, you must delete something below.</p> -->
+               
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /row -->
+
+    <!-- Row -->
+
+    <div class="row">
+        <div class="row row-sm">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="card-title"> Product Datatable</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="editable-responsive-table" class="table editable-table table-nowrap table-bordered table-edit wp-100">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Image</th>
+                                        <th>Price</th>
+                                        <th>MRP</th>
+                                        <th>Size</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                 
+                                <% for(let i = 0; i < Data.length;i++){%>
+                                    <% let item = Data[i]%>
+                                    <tr>
+                                            <td><%=item.code%></td>
+                                            <td><%=item.name%></td>
+                                            <td>
+                                                <% if (item.image && item.image.length > 0) { %>
+                                                    <% item.image.forEach((image, index) => { %>
+                                                        <img src="<%= image %>" style="height: 3em;" alt="Product Image <%= index + 1 %>">
+                                                    <% }) %>
+                                                <% } else { %>
+                                                    No images available
+                                                <% } %>
+                                            </td>
+                                            <td>₹. <%=item.price%></td>
+                                            <td><%=item.mrp%></td>
+                                           <td>
+                                            <% if(item.size && item.size.length > 0){%>
+                                                <%item.size.forEach((item,index)=>{%>
+                                                    <%=item%>
+                                                <%})%>
+                                            <%}%>
+                                           </td>
+                                            <td>
+                                                <div class="card-body">
+                                                    <p class="text-muted"></p>
+                                                    
+                                                   <a href="#" class="btn btn-danger" data-bs-target="#modaldemo3_<%=i%>" data-bs-toggle="modal">Delete </a>
+                                                    
+                                               
+                                                </div> 
+                                            </td>
+                                    </tr>
+                                    <%}%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Row -->
+
+       
+                   
+
+                    
+                </div>
+            </div>
+        </div>
+            <!-- CONTAINER CLOSED -->
+     </div>
+
+
+
+    
+    <!-- Addmodal -->
+    <div id="modaldemo1" class="modal fade">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="/admin/Add-Product"  id="inputForm" method="POST" enctype="multipart/form-data" >
+                <div class="modal-body">
+                    <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder=" Product Name" name="name" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" placeholder="Product MRP" name="mrp" id="mrp" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" class="form-control" placeholder="Product price" name="price" id="price" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Product Description" name="description" id="description" required>
+                    </div>
+                    <div class="form-group">
+                        <select name="category" id="category"  class="form-control" required>
+                            <option>select Category</option>
+                            <% for(i = 0; i < category.length;i++){%>
+                                <% let item = category[i]%>
+                                <option value="<%=item._id%>">
+                                    <%=item.heading%>
+                                </option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <div id="inputContainer">
+                        <div class="input-group">
+                            <input type="text" placeholder="size" class="form-control" name="size[]" required autocomplete="off">
+                            <div class="input-group-append">
+                              <button type="button" class="btn btn-success" onclick="addInputField()">Add</button>
+                              <button type="button" class="btn btn-danger" onclick="deleteInputField(this)">Delete</button>
+                            </div>
+                          </div>
+                          </div>
+                    </div>
+                    <!-- form-group -->
+                    <div class="form-group">
+                        <input class="form-control" placeholder="banner image"  id="formFileLg" name="image" type="file" multiple  required>
+                    </div>
+                   
+                    
+                    <button class="btn btn-primary btn-block mt-5"  type="submit" onclick="submitForm()">Save</button>
+                </div>
+            </form><!-- modal-body -->
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div><!--Add modal close -->
+
+
+   
+   <!-- Editmodal -->
+   <% for (let i = 0; i < Data.length; i++) { %>
+    <% let item = Data[i]; %>
+    <!-- Delete Modal -->
+    <div id="modaldemo3_<%=i%>" class="modal fade">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               
+                <div class="modal-body">
+                    <div class="modal-header" >
+                        <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                       </div>
+                       <div class="modal-body">
+                        <p>Are you sure you want to delete?</p>
+                      </div>
+                      <div class="modal-footer">
+                       <button type="button" class="btn btn-secondary" id="close-modal">No</button>
+                        <a href="delete-Product/<%= item._id %>"  class="btn btn-danger" type="button">Yes</a>
+                       </div>
+            
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div>
+   </div>
+
+    <!-- Delete Modal Close -->
+
+
+<% } %>
+
+
+
+
+  
+   
+
+</div>
+<script>
+//     const sizeArray = [];
+//     let currentIndex = 0;
+//     function getdata() {
+//     const sizeInput = document.getElementById('size');
+//     const data = sizeInput.value.trim();
+
+//     if (data !== '') {
+//         // Add item to the array at currentIndex
+//         sizeArray[currentIndex] = data;
+
+//         // Increment currentIndex for the next item
+//         currentIndex++;
+
+//         // Update the size list
+//         displayItems('selectedsizeList', sizeArray);
+
+//         // Clear the input field
+//         sizeInput.value = '';
+//     }
+
+//     console.log(sizeArray, "rr");
+//     console.log("hiiiii");
+// }
+//    function displayItems(listId, itemsArray) {
+//        const selectedList = document.getElementById(listId);
+//        selectedList.innerHTML = '';
+   
+//        itemsArray.forEach(item => {
+//            const li = document.createElement('li');
+//            li.textContent = item;
+//            selectedList.appendChild(li);
+//        });
+//    }
+   
+   
+//    function submitForm(form) {
+//        console.log("data");
+//        const sizeInput = document.getElementById('size');
+//        sizeInput.value = JSON.stringify(sizeArray);
+   
+//        var formId = "ProductForm_" + form;
+//        var form = document.getElementById(formId);
+   
+//        console.log("Form ID:", formId);
+//        console.log("size Value:", sizeInput.value);
+   
+//        form.submit();
+//    }
+//        document.addEventListener('DOMContentLoaded', function () {
+//            const jobForm = document.getElementById('ProductForm');
+        
+   
+         
+   
+           
+   
+           
+   
+//            const cancelBtn = document.getElementById('cancelBtn');
+//            cancelBtn.addEventListener('click', function () {
+//                jobForm.reset();
+//                selectedsize.length = 0;
+              
+//                updateSelectedsize();
+             
+//            });
+//        });
+
+document.addEventListener('DOMContentLoaded', function() {
+      function addInputField() {
+        const inputContainer = document.getElementById('inputContainer');
+        const newInputGroup = document.createElement('div');
+        newInputGroup.className = 'input-group';
+        newInputGroup.innerHTML = `
+          <input type="text" placeholder="size" class="form-control" name="size[]" required autocomplete="off">
+          <div class="input-group-append">
+            <button type="button" class="btn btn-success" onclick="addInputField()">Add</button>
+            <button type="button" class="btn btn-danger" onclick="deleteInputField(this)">Delete</button>
+          </div>
+        `;
+        inputContainer.appendChild(newInputGroup);
+      }
+
+      function deleteInputField(button) {
+        const inputGroup = button.parentElement.parentElement;
+        const inputContainer = document.getElementById('inputContainer');
+        if (inputContainer.children.length > 1) {
+          inputContainer.removeChild(inputGroup);
+        } else {
+          alert("At least one input field is required.");
+        }
+      }
+
+      window.addInputField = addInputField;
+      window.deleteInputField = deleteInputField;
+    }); </script>
