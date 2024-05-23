@@ -9,7 +9,7 @@ const category = require("../controller/category");
 const Product = require("../controller/product");
 
 
-router.get('/',Admin.RenderAdminHome);
+router.get('/wonky',Admin.RenderDashboard);
 
 //banner
 router.get('/banner',banner.RenderAddBanner);
@@ -39,8 +39,6 @@ router.get('/delete-Category/:id',category.DeleteCategory);
 router.get('/Product',Product.RenderProductPage);
 router.post('/Add-Product',upload.array("image"),Product.AddProduct);
 router.get('/delete-Product/:id',Product.DeleteProduct);
-
-
 
 
 module.exports=router;

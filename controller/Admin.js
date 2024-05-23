@@ -1,7 +1,7 @@
 module.exports={
-    RenderAdminHome: async(req,res)=>{
+    RenderDashboard: async(req,res)=>{
         try {
-            res.render('Admin/Dashboard',{layout: "adminlayout"})
+            res.render('Admin/Dashboard',{layout:"adminlayout"})
         } catch (error) {
             console.log(error);
         }
