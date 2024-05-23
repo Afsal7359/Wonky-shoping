@@ -41,5 +41,4 @@ router.post('/Add-Product',upload.array("image"),Product.AddProduct);
 router.get('/delete-Product/:id',Product.DeleteProduct);
 
 
-
 module.exports=router;
