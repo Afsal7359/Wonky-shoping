@@ -47,12 +47,42 @@
 .slider-text {
     height: 550px;
 }
+/* Default styles */
+#logoContainer {
+    justify-content: space-around;
+}
+
+#logoImage {
+    height: 55px;
+    width: 55px;
+}
+
+/* Styles for mobile devices */
+@media (max-width: 400px) {
+    #logoImage {
+        height: 55px;
+        width: 55px;
+    }
+}
 
 /* Media query for mobile devices (width less than 768px) */
 @media (max-width: 767px) {
     .slider-text {
         height: 200px;
         padding: 5em;
+    }
+    #logoContainer {
+        justify-content: space-around; /* Increase space between elements */
+    }
+
+    #logoImage {
+        height: 45px; /* Decrease height of the logo */
+        width: 45px
+    }
+
+    /* Optional: Increase margin-top for better alignment */
+    .mt-4 {
+        margin-top: 1.5rem; /* Adjust as needed */
     }
 }
 

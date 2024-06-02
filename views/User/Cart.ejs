@@ -6,7 +6,7 @@
                 <form action="#">
                     <div class="table-content table-responsive">
                         <table>
-                            <thead>
+                            <thead class="tbhead">
                                 <tr>
                                     <th class="product-name">Remove</th>
                                     <th class="product-price">Images</th>
@@ -17,20 +17,13 @@
                                     <th class="product-subtotal">Total</th>
                                 </tr>
                             </thead>
+                            <h4 class="text-danger text-center">Cart Empty !!!</h4>
                             <tbody id="cartItems">
                                 <!-- Items will be populated here -->
+                              
                             </tbody>
                         </table>
                     </div>
-                    <!-- <div class="row">
-                        <div class="col-xl-12 col-lg-12 col-md-12 col-12">
-                            <div class="coupon-all">
-                                <div class="coupon2">
-                                    <input class="button" name="update_cart" value="Update cart" type="submit">
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="row">
                         <div class="col-lg-5 ms-auto col-md-12 col-12">
                             <div class="cart-total">
@@ -40,7 +33,6 @@
                                     <li>Total <span id="total">0.00</span></li>
                                 </ul>
                                 <a href="#" id="checkoutButton" target="_blank">Proceed to checkout</a>
-
                             </div>
                         </div>
                     </div>
@@ -50,113 +42,133 @@
     </div>
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cartItemsContainer = document.getElementById('cartItems');
+        const subtotalElement = document.getElementById('subtotal');
+        const totalElement = document.getElementById('total');
+        const checkoutButton = document.getElementById('checkoutButton');
+        const cartHeading = document.querySelector('.cart-heading');
+        const cartTotalContainer = document.querySelector('.cart-total');
+        const tabledisplay = document.querySelector('.tbhead')
+        const emptyhead = document.querySelector('.text-danger')
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-    const cartItemsContainer = document.getElementById('cartItems');
-    const subtotalElement = document.getElementById('subtotal');
-    const totalElement = document.getElementById('total');
-    const checkoutButton = document.getElementById('checkoutButton');
+        // Function to load cart items from localStorage
+        function loadCartItems() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cartItemsContainer.innerHTML = ''; // Clear any existing items
+            let subtotal = 0;
 
-    // Function to load cart items from localStorage
-    function loadCartItems() {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cartItemsContainer.innerHTML = ''; // Clear any existing items
-        let subtotal = 0;
+            if (cart.length === 0) {
+                cartHeading.classList.add('hidden');
+                cartTotalContainer.classList.add('hidden');
+                tabledisplay.classList.add('hidden')
+                emptyhead.classList.remove('hidden')
+               
+            } else {
+                cartHeading.classList.remove('hidden');
+                cartTotalContainer.classList.remove('hidden');
+                tabledisplay.classList.remove('hidden')
+                emptyhead.classList.add('hidden')
+            }
 
-        cart.forEach(item => {
-            let itemTotal = item.price * item.quantity;
-            subtotal += itemTotal;
+            cart.forEach(item => {
+                let itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
 
-            // Create a new row for each cart item
-            let row = document.createElement('tr');
+                // Create a new row for each cart item
+                let row = document.createElement('tr');
 
-            row.innerHTML = `
-                <td class="product-remove"><a href="#" class="remove-item" data-code="${item.code}" data-size="${item.size}"><i class="fa fa-times"></i></a></td>
-                <td class="product-thumbnail"><a href="#"><img src="${item.image}" height="65px" alt=""></a></td>
-                <td class="product-name"><a href="#">${item.name}</a></td>
-                <td class="product-size"><a href="#">${item.size}</a></td>
-                <td class="product-price"><span class="amount">₹${item.price}</span></td>
-                <td class="product-quantity"><input value="${item.quantity}" type="number" min="1" class="quantity-input" data-code="${item.code}" data-size="${item.size}"></td>
-                <td class="product-subtotal">₹${itemTotal}</td>
-            `;
+                row.innerHTML = `
+                    <td class="product-remove"><a href="#" class="remove-item" data-code="${item.code}" data-size="${item.size}"><i class="fa fa-times"></i></a></td>
+                    <td class="product-thumbnail"><a href="#"><img src="${item.image}" height="65px" alt=""></a></td>
+                    <td class="product-name"><a href="#">${item.name}</a></td>
+                    <td class="product-size"><a href="#">${item.size}</a></td>
+                    <td class="product-price"><span class="amount">₹${item.price}</span></td>
+                    <td class="product-quantity"><input value="${item.quantity}" type="number" min="1" class="quantity-input" data-code="${item.code}" data-size="${item.size}"></td>
+                    <td class="product-subtotal">₹${itemTotal}</td>
+                `;
 
-            cartItemsContainer.appendChild(row);
-        });
+                cartItemsContainer.appendChild(row);
+            });
 
-        // Update the subtotal and total
-        subtotalElement.textContent = `₹${subtotal}`;
-        totalElement.textContent = `₹${subtotal}`;
-    }
+            // Update the subtotal and total
+            subtotalElement.textContent = `₹${subtotal}`;
+            totalElement.textContent = `₹${subtotal}`;
+        }
 
-    // Function to update cart item quantity in localStorage
-    function updateCartItem(code, size, quantity) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        let itemIndex = cart.findIndex(item => item.code === code && item.size === size);
+        // Function to update cart item quantity in localStorage
+        function updateCartItem(code, size, quantity) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let itemIndex = cart.findIndex(item => item.code === code && item.size === size);
 
-        if (itemIndex !== -1) {
-            cart[itemIndex].quantity = quantity;
+            if (itemIndex !== -1) {
+                cart[itemIndex].quantity = quantity;
+                localStorage.setItem('cart', JSON.stringify(cart));
+                loadCartItems(); // Reload cart items to reflect changes
+            }
+        }
+
+        // Function to remove cart item from localStorage
+        function removeCartItem(code, size) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(item => !(item.code === code && item.size === size));
             localStorage.setItem('cart', JSON.stringify(cart));
             loadCartItems(); // Reload cart items to reflect changes
         }
-    }
 
-    // Function to remove cart item from localStorage
-    function removeCartItem(code, size) {
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart = cart.filter(item => !(item.code === code && item.size === size));
-        localStorage.setItem('cart', JSON.stringify(cart));
-        loadCartItems(); // Reload cart items to reflect changes
-    }
-
-    // Event listener for quantity change
-    cartItemsContainer.addEventListener('input', function (e) {
-        if (e.target.classList.contains('quantity-input')) {
-            let newQuantity = parseInt(e.target.value);
-            let code = e.target.getAttribute('data-code');
-            let size = e.target.getAttribute('data-size');
-            if (newQuantity >= 1) {
-                updateCartItem(code, size, newQuantity);
+        // Event listener for quantity change
+        cartItemsContainer.addEventListener('input', function (e) {
+            if (e.target.classList.contains('quantity-input')) {
+                let newQuantity = parseInt(e.target.value);
+                let code = e.target.getAttribute('data-code');
+                let size = e.target.getAttribute('data-size');
+                if (newQuantity >= 1) {
+                    updateCartItem(code, size, newQuantity);
+                }
             }
-        }
-    });
-
-    // Event listener for remove button
-    cartItemsContainer.addEventListener('click', function (e) {
-        if (e.target.classList.contains('remove-item') || e.target.parentElement.classList.contains('remove-item')) {
-            e.preventDefault();
-            let code = e.target.getAttribute('data-code') || e.target.parentElement.getAttribute('data-code');
-            let size = e.target.getAttribute('data-size') || e.target.parentElement.getAttribute('data-size');
-            removeCartItem(code, size);
-        }
-    });
-
-    // Event listener for checkout button
-    checkoutButton.addEventListener('click', function (e) {
-        e.preventDefault();
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        if (cart.length === 0) {
-            alert('Your cart is empty');
-            return;
-        }
-
-        let message = 'Order Details:%0A';
-        cart.forEach(item => {
-            message += `Product: ${item.name}%0A`;
-            message += `Price: ₹${item.price}%0A`;
-            message += `Quantity: ${item.quantity}%0A`;
-            message += `Size: ${item.size}%0A`;
-            message += `Total: ₹${item.price * item.quantity}%0A%0A`;
         });
-        message += `Subtotal: ${subtotalElement.textContent}%0A`;
-        message += `Total: ${totalElement.textContent}`;
 
-        let whatsappUrl = `https://wa.me/9999999999?text=${message}`;
-        window.open(whatsappUrl, '_blank');
+        // Event listener for remove button
+        cartItemsContainer.addEventListener('click', function (e) {
+            if (e.target.classList.contains('remove-item') || e.target.parentElement.classList.contains('remove-item')) {
+                e.preventDefault();
+                let code = e.target.getAttribute('data-code') || e.target.parentElement.getAttribute('data-code');
+                let size = e.target.getAttribute('data-size') || e.target.parentElement.getAttribute('data-size');
+                removeCartItem(code, size);
+            }
+        });
+
+        // Event listener for checkout button
+        checkoutButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert('Your cart is empty');
+                return;
+            }
+
+            let message = 'Order Details:%0A';
+            cart.forEach(item => {
+                message += `Product: ${item.name}%0A`;
+                message += `Price: ₹${item.price}%0A`;
+                message += `Quantity: ${item.quantity}%0A`;
+                message += `Size: ${item.size}%0A`;
+                message += `Total: ₹${item.price * item.quantity}%0A%0A`;
+            });
+            message += `Subtotal: ${subtotalElement.textContent}%0A`;
+            message += `Total: ${totalElement.textContent}`;
+
+            let whatsappUrl = `https://wa.me/9999999999?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // Load cart items on page load
+        loadCartItems();
     });
-
-    // Load cart items on page load
-    loadCartItems();
-});
-
-    </script>
+</script>
+<style>
+    .hidden {
+        display: none;
+    }
+</style>
