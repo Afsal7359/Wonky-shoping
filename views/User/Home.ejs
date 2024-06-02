@@ -5,13 +5,13 @@
 
                 <% for (let i = 0; i < BannerData.length; i++){%>
                     <% let item = BannerData[i]; %>
-            <div class="single-slider slider-opacity ptb-250 gray-2-bg" style="background-image: url(<%=item.image%>);">
-                <div class="slider-text" style="background-color: rgba(255, 255, 255, 0.5); padding: 20px; border-radius: 45px;">
-                    <h2 style="opacity: 0.9;"><%=item.heading%></h2>
-                    <h3 style="opacity: 0.9;"><%=item.description%></h3>
-                    <a href="/shop" style="opacity: 0.9;">Shop The Collection</a>
-                </div>
-            </div>
+                    <div class="single-slider slider-opacity gray-2-bg" style="background-image: url(<%=item.image%>);">
+                        <div class="slider-text">
+                            <!-- <h2 style="opacity: 0.9;"><%=item.heading%></h2>
+                            <h3 style="opacity: 0.9;"><%=item.description%></h3> -->
+                            <!-- <a href="/shop" style="opacity: 0.9;">Shop The Collection</a> -->
+                        </div>
+                    </div>
          
             <%}%>
           <%}else{%>
@@ -34,10 +34,10 @@
                         <% let fashion = FashionData[j]; %>
                     <div class="col-lg-4 col-md-4">
                         <div class="single-banner mb-30">
-                            <a href="#"><img src="<%=fashion.image%>" style="height: 300px; width: 300px;" alt=""></a>
+                            <a href="#"><img src="<%=fashion.image%>" style="height: 300px; width: 250px;" alt=""></a>
                             <div class="single-banner-title">
                                 <h3><%=fashion.heading%></h3>
-                                <a href="/shop">shop now</a>
+                                <a href="fashion/<%=fashion._id%>">shop now</a>
                             </div>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                         </div>
                 </div>
                 <div class="view-more text-center mt-30">
-                    <a href="/shop">view more</a>
+                    <a href="/shop" style="background-color: #fff; color: black;border-radius: 10px;">view more</a>
                 </div>
             </div>
         </div>			
@@ -102,7 +102,7 @@
                     <div class="col-lg-3 col-md-6 col-sm-6">
                         <div class="single-blog mb-30">
                             <a href="/shop">
-                                <img src="<%=item.image%>" height="285px" width="90%" alt="">
+                                <img src="<%=item.image%>" style="height: 300px;width: 250px;" alt="">
                             </a>
                             <div class="blog-title">
                                 <span><%=item.heading%></span>

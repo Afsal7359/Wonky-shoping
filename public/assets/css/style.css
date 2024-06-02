@@ -30,6 +30,31 @@
 /*---------------------
   7. Login area
 -------------------------*/
+.textcolor{
+    color: #fff;
+}
+.single-slider {
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
+.slider-text {
+    width: 100%;
+}
+
+/* Default height for larger devices */
+.slider-text {
+    height: 550px;
+}
+
+/* Media query for mobile devices (width less than 768px) */
+@media (max-width: 767px) {
+    .slider-text {
+        height: 200px;
+        padding: 5em;
+    }
+}
 
 .waraper {
     padding: 0 100px;

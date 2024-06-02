@@ -1,4 +1,5 @@
 const Category = require("../Models/Category");
+const Fashion = require("../Models/Fashion");
 const Product = require("../Models/Product");
 const cloudinary = require("../util/cloudinary");
 
@@ -7,7 +8,8 @@ module.exports={
         try {
             const Data = await Product.find().sort({_id: -1})
             const category= await Category.find();
-            res.render('Admin/Product',{layout:"adminlayout",Data,category})
+            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
+            res.render('Admin/Product',{layout:"adminlayout",Data,category,FashionData})
         } catch (error) {
             console.log(error);
             res.status(500).json({message:"server Error"})
@@ -16,7 +18,7 @@ module.exports={
     AddProduct:async(req,res)=>{
         try {
             console.log(req.body);
-            const {name,mrp,price,description,category,size}=req.body;
+            const {name,mrp,price,description,category,size,fashion}=req.body;
             let imagess = req.files;
             const imagesurl=[]
             console.log(imagess);
@@ -43,7 +45,7 @@ module.exports={
             
             console.log(imagesurl);
 
-            await Product.create({code:productCode,name,mrp,price,description,size,category,image:imagesurl})
+            await Product.create({code:productCode,name,mrp,price,fashion,description,size,category,image:imagesurl})
             console.log("Product Added Succesffuly");
             res.redirect('/admin/Product')
             

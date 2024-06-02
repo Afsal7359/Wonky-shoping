@@ -38,6 +38,10 @@ const ProductSchema = new mongoose.Schema({
     category:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
+    },
+    fashion:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Fashion',
     }
 })
 

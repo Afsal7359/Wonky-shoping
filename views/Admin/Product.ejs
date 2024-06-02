@@ -172,6 +172,17 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <select name="fashion" id="fashion"  class="form-control" required>
+                            <option>select Fashion</option>
+                            <% for(i = 0; i < FashionData.length;i++){%>
+                                <% let item = FashionData[i]%>
+                                <option value="<%=item._id%>">
+                                    <%=item.heading%>
+                                </option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <div id="inputContainer">
                         <div class="input-group">
                             <input type="text" placeholder="size" class="form-control" name="size[]" required autocomplete="off">

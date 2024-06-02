@@ -1,6 +1,75 @@
+ 
  <!-- footer area end -->
- <div class="footer-bottom text-center ptb-10">
-    <p>
-        <a href="https://wa.me/7902367359" target="_blank"> Need any help from Developing Team ?</a>
-    </p>
-</div>
+   <!-- footer area end -->
+   <footer class="footer-area" style="background-color: #000;">
+    <div class="container-fluid" >
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-12 col-sm-12 mt-2">
+                <div class="footer-logo">
+                    <a href="#"><img src="/assets/images/bonky/logo.jpg" height="75px" alt=""></a>
+                    <p class="textcolor">Lorem ipsum dolor sit amet tempor, consectetur adipisicing. Lorem ipsum dolor sit amet tempor, consectetur adipisicing. Lorem ipsum dolor sit amet tempor, consectetur adipisicing.</p>
+                    <ul>
+                        <li><a href="https://www.facebook.com/devitems/?ref=bookmarks"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="https://www.linkedin.com/"><i class="fa fa-whatsapp"></i></a></li>
+                        <li><a href="https://www.instagram.com/devitems/"><i class="fa fa-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-6 col-sm-6 mt-5">
+                <div class="row">
+                    <div class="col-lg-6 col-md-4 col-sm-4">
+                        <div class="footer-title res-mrg">
+                            <h3 style="color: #fff;">Links</h3>
+                            <div class="footer-menu">
+                                <ul> 
+                                    <li><a href="/"><p  class="textcolor">Home</p> </a></li>
+                                    <li><a href="/shop"><p class="textcolor">Shop</p> </a></li>
+                                    <li><a href="/contact"><p class="textcolor">Contact</p> </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                 
+                   
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-6 col-sm-6 mt-5">
+                <div class="row">
+                    <div class="col-lg-6 col-md-4 col-sm-4">
+                        <div class="footer-title res-mrg">
+                            <h3 style="color: #fff;">Fashion</h3>
+                            <div class="footer-menu">
+                                <ul> 
+                                    <% if (FashionData) { %>
+                                        <% if (FashionData[0]) { %>
+                                            <li><a href="/fashion/<%= FashionData[0]._id %>"><p class="textcolor"><%= FashionData[0].heading %></p></a></li>
+                                        <% } %>
+                                        <% if (FashionData[1]) { %>
+                                            <li><a href="/fashion/<%= FashionData[1]._id %>"><p class="textcolor"><%= FashionData[1].heading %></p></a></li>
+                                        <% } %>
+                                        <% if (FashionData[2]) { %>
+                                            <li><a href="/fashion/<%= FashionData[2]._id %>"><p class="textcolor"><%= FashionData[2].heading %></p></a></li>
+                                        <% } %>
+                                    <% } %>
+                                    
+                                  
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                 
+                   
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="container-fluid">
+        <div class="footer-bottom text-center ptb-10">
+            <p>
+                <a href="https://wa.me/7902367359" target="_blank"> Need any help from Developing Team ?</a>
+            </p>
+        </div>
+    </div>
+</footer>
+ 

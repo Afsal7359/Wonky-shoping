@@ -21,8 +21,9 @@ module.exports = {
     },
     UserShopPage:async(req,res)=>{
         try {
+            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
             const CategoryData = await Category.find().sort({_id: -1})
-            res.render('User/Shop',{data:CategoryData})
+            res.render('User/Shop',{data:CategoryData,FashionData})
         } catch (error) {
             console.log(error);
         }
@@ -33,7 +34,8 @@ module.exports = {
             const data = await Product.find({code:id})
             // console.log(data[0].size[0],"ssssssssssiiiiiiiiii");
             console.log(data,"data");
-            res.render('User/Product-details',{layout:"layout",data})
+            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
+            res.render('User/Product-details',{layout:"layout",data,FashionData})
         } catch (error) {
             console.log(error);
         }
@@ -41,15 +43,17 @@ module.exports = {
    
     UserContactPage :async(req,res)=>{
         try {
-            res.render('User/Contact')
+            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
+            res.render('User/Contact',{FashionData})
         } catch (error) {
             console.log(error);
         }
     },
     UserCartPage :async(req,res)=>{
         try {
+            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
             console.log("hhhhhhhhhhh");
-            res.render('User/Cart')
+            res.render('User/Cart',{FashionData})
         } catch (error) {
             console.log(error);
         }
@@ -58,6 +62,7 @@ module.exports = {
         try {
             const id = req.params.id;
             const data = await Product.find({ category: new mongoose.Types.ObjectId(id) }).populate('category');
+            
             if(data.length !==0){
                 var categoryname = data[0].category.heading
             }
@@ -65,10 +70,27 @@ module.exports = {
             console.log(categoryname,"catgeory namee");
             console.log(id,"idddddddddddddd");
             console.log(data,"dataa");
-            res.render('User/Product',{data,categoryname})
+            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
+            res.render('User/Product',{data,categoryname,FashionData})
         } catch (error) {
             console.log(error);
             res.status(500).json({message:"server error"})
         }
     },
+    UserFashionProduct :async(req,res)=>{
+        try {
+            const id = req.params.id
+            const data = await Product.find({ fashion: new mongoose.Types.ObjectId(id) }).populate('category').populate('fashion')
+            // console.log(data[0].size[0],"ssssssssssiiiiiiiiii");
+            if(data.length !==0){
+                var categoryname  = data[0].fashion.heading
+            }
+            console.log(data,"data");
+            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
+            res.render('User/Product',{data,FashionData,categoryname})
+        } catch (error) {
+            console.log(error);
+        }
+    },
+   
 }

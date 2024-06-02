@@ -10,7 +10,8 @@ router.get('/contact',User.UserContactPage)
 router.get('/cart',User.UserCartPage);
 // router.get('/products',User.UserProductDetailPage)
 router.get('/:id',User.UserProductDetailPage)
-
+router.get('/fashion/:id',User.UserFashionProduct);
+    
 
 
 module.exports = router;
