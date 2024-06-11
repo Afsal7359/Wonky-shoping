@@ -85,6 +85,15 @@
         margin-top: 1.5rem; /* Adjust as needed */
     }
 }
+header {
+    background-color: #000;
+    height: 65px; /* Default height for mobile devices */
+}
+@media (min-width: 768px) {
+    header {
+        height: 100px; /* Height for larger devices */
+    }
+}
 
 .waraper {
     padding: 0 100px;
