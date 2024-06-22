@@ -11,6 +11,7 @@
                                     <th class="product-name">Remove</th>
                                     <th class="product-price">Images</th>
                                     <th class="product-name">Product</th>
+                                    <th class="product-code">Code</th>
                                     <th class="product-size">Size</th>
                                     <th class="product-price">Price</th>
                                     <th class="product-quantity">Quantity</th>
@@ -83,6 +84,7 @@
                     <td class="product-remove"><a href="#" class="remove-item" data-code="${item.code}" data-size="${item.size}"><i class="fa fa-times"></i></a></td>
                     <td class="product-thumbnail"><a href="#"><img src="${item.image}" height="65px" alt=""></a></td>
                     <td class="product-name"><a href="#">${item.name}</a></td>
+                     <td class="product-name"><a href="#">${item.code}</a></td>
                     <td class="product-size"><a href="#">${item.size}</a></td>
                     <td class="product-price"><span class="amount">₹${item.price}</span></td>
                     <td class="product-quantity"><input value="${item.quantity}" type="number" min="1" class="quantity-input" data-code="${item.code}" data-size="${item.size}"></td>
@@ -151,16 +153,18 @@
             let message = 'Order Details:%0A';
             cart.forEach(item => {
                 message += `Product: ${item.name}%0A`;
+                message += `Product Code: ${item.code}%0A`;
                 message += `Price: ₹${item.price}%0A`;
                 message += `Quantity: ${item.quantity}%0A`;
                 message += `Size: ${item.size}%0A`;
                 message += `Total: ₹${item.price * item.quantity}%0A%0A`;
             });
-            message += `Subtotal: ${subtotalElement.textContent}%0A`;
+         
             message += `Total: ${totalElement.textContent}`;
 
-            let whatsappUrl = `https://wa.me/9999999999?text=${message}`;
+            let whatsappUrl = `https://wa.me/7012060213?text=${message}`;
             window.open(whatsappUrl, '_blank');
+            localStorage.removeItem('cart');
         });
 
         // Load cart items on page load

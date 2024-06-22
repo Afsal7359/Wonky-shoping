@@ -132,7 +132,7 @@
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         
         // Check if the product already exists in the cart
-        let existingProductIndex = cart.findIndex(item => item.name === product.name && item.size === product.size);
+        let existingProductIndex = cart.findIndex(item => item.code === product.code && item.size === product.size);
 
         if (existingProductIndex !== -1) {
             // If the product exists, update its quantity

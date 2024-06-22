@@ -11,8 +11,8 @@ module.exports = {
 
             const BannerData = await Banner.find().sort({_id: -1}).limit(3)
             const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
-            const OfferData = await Offer.find().sort({_id: -1}).limit(4);
-            const ProductData = await Product.find().sort({_id: -1}).limit(8)
+            const OfferData = await Offer.find().sort({_id: -1}).limit(3);
+            const ProductData = await Product.find().sort({_id: -1}).limit(3)
         res.render('User/Home',{BannerData,FashionData,OfferData,ProductData})
         }catch (err){
             console.log(err);

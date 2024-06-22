@@ -38,6 +38,7 @@ router.get('/delete-Category/:id',category.DeleteCategory);
 //Product
 router.get('/Product',Product.RenderProductPage);
 router.post('/Add-Product',upload.array("image"),Product.AddProduct);
+router.post('/edit-product/:id',upload.array("image"),Product.EditProduct);
 router.get('/delete-Product/:id',Product.DeleteProduct);
 
 
