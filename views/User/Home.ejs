@@ -45,26 +45,39 @@
                 </div>
             </div>
         </div>
-        <!-- fashion area start -->
-        <div class="banner-area pb-70 mt-5">
+
+
+            
+        <!-- shop area start -->
+        <div class="shop-area ptb-90">
             <div class="container-fluid">
-                <div class="row">
-                     <% for (let j = 0; j < FashionData.length; j++){%>
-                        <% let fashion = FashionData[j]; %>
-                    <div class="col-lg-4 col-md-4">
-                        <div class="single-banner mb-30">
-                            <a href="#"><img src="<%=fashion.image%>" style="height: 300px; width: 250px;" alt=""></a>
-                            <div class="single-banner-title">
-                                <h3><%=fashion.heading%></h3>
-                                <a href="fashion/<%=fashion._id%>">shop now</a>
+                <div class="swiper-container" style="overflow: hidden;">
+                    <div class="swiper-wrapper">
+                        <% for (let j = 0; j < FashionData.length; j++){ %>
+                            <% let fashion = FashionData[j]; %>
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12 grid-item cat1 swiper-slide">
+                                <div class="shop hover-style mb-30">
+                                    <div class="shop-img">
+                                        <div class="shop-single-img">
+                                            <a href="fashion/<%= fashion._id %>">
+                                                <img src="<%=fashion.image%>" alt="" style="height: 285px;width: 250px;" />
+                                            </a>
+                                        
+                                        </div>								
+                                        <div class="title-style-3 text-center">
+                                            <h3><a href="#"><%=fashion.heading%></a></h3>
+                                        <p><%=fashion.description%></p>
+                                        </div>
+                                    </div>							
+                                </div>
                             </div>
+                           <%}%>
                         </div>
-                    </div>
-                    <%}%>
                 </div>
+             
             </div>
-        </div>
-        <!-- banner area end -->
+        </div>			
+        <!-- shop area end -->
 
 
          <!-- shop area start -->
@@ -74,11 +87,11 @@
                     <h3>Featured Collections</h3>
                     <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
                 </div>		
-                <div class="shop-style-all">
-                        <div class="grid row">
+                <div class="swiper-container" style="overflow: hidden;">
+                    <div class="swiper-wrapper">
                             <% for (let i = 0; i< ProductData.length; i++){%>
                                 <% let item = ProductData[i]%>
-                            <div class="col-lg-4 col-md-6 col-sm-6 col-12 grid-item cat1">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12 grid-item cat1 swiper-slide">
                                 <div class="shop hover-style mb-30">
                                     <div class="shop-img">
                                         <div class="shop-single-img">
@@ -116,9 +129,11 @@
                     <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
                 </div>
                 <div class="row">
+                    <div class="swiper-container" style="overflow: hidden;">
+                        <div class="swiper-wrapper">
                     <% for(let i = 0; i < OfferData.length; i++){%>
                         <% let item = OfferData[i]; %>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="col-lg-4 col-md-6 col-sm-6 swiper-slide">
                         <div class="single-blog mb-30">
                             <a href="/shop">
                                 <img src="<%=item.image%>" style="height: 300px;width: 250px;" alt="">
@@ -131,6 +146,8 @@
                         </div>
                     </div>
                    <%}%>
+                        </div>
+                        </div>
                 </div>	
             </div>
         </div>
@@ -140,4 +157,30 @@
    
 
 
-            
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const swiper = new Swiper('.swiper-container', {
+                    speed: 400,
+                    loop: true,
+                    autoplay: {
+                        delay: 3000,
+                        disableOnInteraction: false
+                    },
+                    breakpoints: {
+                        640: {
+                            slidesPerView: 1,
+                            spaceBetween: 30,
+                        },
+                        768: {
+                            slidesPerView: 2,
+                            spaceBetween: 60,
+                        },
+                        1024: {
+                            slidesPerView: 3,
+                            spaceBetween: 60,
+                        }
+                    }
+                });
+            });
+        </script>
+        

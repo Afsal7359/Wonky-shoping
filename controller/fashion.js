@@ -12,11 +12,11 @@ module.exports={
     },
     AddFashion:async(req,res)=>{
         try {
-            const {heading} = req.body
+            const {heading,description} = req.body
             const result = await cloudinary.uploader.upload(req.file.path)
             console.log(result,"result");
             const image = result.url
-            await Fashion.create({heading,image})
+            await Fashion.create({heading,description,image})
             console.log('Fashion Added successfully');
             res.redirect('/admin/Fashion'); 
         } catch (error) {
@@ -26,7 +26,7 @@ module.exports={
     EditFashion : async(req,res)=>{
         try {
             const id = req.params.id;
-            const { heading } = req.body;
+            const { heading,description } = req.body;
             const data = await Fashion.findById(id);
     
             if (!data) {
@@ -52,6 +52,7 @@ module.exports={
             // Update the banner with new details
             await Fashion.findByIdAndUpdate(id, {
                 heading,
+                description,
                 image
             });
     

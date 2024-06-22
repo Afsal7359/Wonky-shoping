@@ -43,12 +43,12 @@
                 <p class="text-muted"></p>
                 <!-- Check if there are less than 3 banners before enabling the "Add" button -->
           
-                <% if (Data.length < 3){%>
+                <% if (Data.length < 6){%>
                     <a href="#" class="btn btn-primary" data-bs-target="#modaldemo1" data-bs-toggle="modal">
                         Add
                     </a>
                     <%}else{%>
-                        <p class="text-danger">You have only allowed to Add 3 Fashions</p>
+                        <p class="text-danger">You have only allowed to Add 6 Fashions</p>
                     <%}%>
                
                 <!-- Display a message or modal to inform the user that they can't add more banners -->
@@ -76,6 +76,7 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Fashion Name</th>
+                                            <th>Description</th>
                                             <th>Image</th>
                                             <th>Action</th>
                                         </tr>
@@ -88,6 +89,7 @@
                                            
                                                 <td>1</td>
                                                 <td> <%=item.heading%> </td>
+                                                <td> <%=item.description%> </td>
                                                 <td><img src="<%=item.image%>" style="height: 5em;"></td>
                                                 <td>
                                                     <div class="card-body">
@@ -146,7 +148,9 @@
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Fashion Name" name="heading" id="heading" required>
                     </div>
-                  
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Fashion Description" name="description" id="description" required>
+                    </div>
                     <!-- form-group -->
                     <div class="form-group">
                         <input class="form-control" placeholder="Fashion image"  id="formFileLg" name="image" type="file" required>
@@ -176,7 +180,9 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Fashion Name " value="<%= item.heading %>" name="heading" id="heading" >
                             </div>
-                            
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Fashion Description " value="<%= item.description %>" name="heading" id="heading" >
+                            </div>
                             <img src="<%= item.image %>"  id="selectedImage<%= item._id %>" style="height: 14em;">
                             <div class="form-group">
                                 <input class="form-control" placeholder="banner image" id="formFileLg_<%= i %>" value="selectedImage<%= item.image %>" name="image" type="file" onchange="updateImagePreview(this, 'selectedImage<%= item._id %>')">

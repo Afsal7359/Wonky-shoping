@@ -9,10 +9,10 @@ module.exports = {
     userHome: async(req, res)=>{
         try{
 
-            const BannerData = await Banner.find().sort({_id: -1}).limit(3)
-            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
-            const OfferData = await Offer.find().sort({_id: -1}).limit(3);
-            const ProductData = await Product.find().sort({_id: -1}).limit(3)
+            const BannerData = await Banner.find().sort({_id: -1}).limit(5)
+            const FashionData = await Fashion.find().sort({_id: -1}).limit(10)
+            const OfferData = await Offer.find().sort({_id: -1}).limit(10);
+            const ProductData = await Product.find().sort({_id: -1}).limit(10)
         res.render('User/Home',{BannerData,FashionData,OfferData,ProductData})
         }catch (err){
             console.log(err);
