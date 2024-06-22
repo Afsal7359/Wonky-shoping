@@ -42,8 +42,12 @@
   
 
 
+        <%if(locals.adminlogin){%>
+            <%- body %>
+         <%}else{%>
             <%- include('partials/adminheader') %> 
          <%- body %>
+         <%}%>
 
     </body>
 

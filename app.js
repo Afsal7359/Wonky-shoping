@@ -23,7 +23,7 @@ app.use(expressEjsLayouts)
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({resave:false,saveUninitialized: true,secret:"key",cookie:{maxAge:6000000}}));
+app.use(session({resave:false,saveUninitialized: true,secret:"key",  cookie: { maxAge: 1 * 24 * 60 * 60 * 1000 }}));
 app.use(function (req, res, next) {
   res.header('Cache-Control', 'no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0');
   next();
