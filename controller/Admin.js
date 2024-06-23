@@ -15,10 +15,10 @@ module.exports={
             // Check if the admin is already logged in
             if (req.session.adminLoggedIn) {
                 console.log("Already logged in");
-                 res.redirect('/admin');
+                 res.redirect('/admin/wonky');
             } else {
                 // Admin is not logged in, render the login page
-                res.render('admin/login', { layout: "adminlayout", adminlogin: true, adminlogErr: null });
+                res.render('Admin/login', { layout: "adminlayout", adminlogin: true, adminlogErr: null });
             }
             // Admin is not logged in, render the login page
 
