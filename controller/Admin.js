@@ -36,7 +36,7 @@ module.exports={
             const loginadmin = await adminlogin.findOne({ email });
             console.log(loginadmin,'logadm');
             if (!loginadmin) {
-                return res.render('admin/login', { layout: 'adminlayout', adminlogin: true, adminlogErr: 'Email does not exist' });
+                return res.render('Admin/login', { layout: 'adminlayout', adminlogin: true, adminlogErr: 'Email does not exist' });
             }else{
  
                 let passwordCorrect
@@ -48,7 +48,7 @@ module.exports={
                 // const passwordCorrect = await bcrypt.compare(password, loginadmin.password);
                 if (!passwordCorrect) {
                     // res.render('admin/login', { layout: "adminlayout", adminlogin: true });
-                    return res.render('admin/Login', { layout: 'adminlayout', adminlogin: true, adminlogErr: 'Incorrect password' });
+                    return res.render('Admin/Login', { layout: 'adminlayout', adminlogin: true, adminlogErr: 'Incorrect password' });
               
                 } else {
                     req.session.admin = email;
