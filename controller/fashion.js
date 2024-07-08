@@ -4,7 +4,7 @@ const cloudinary = require("../util/cloudinary");
 module.exports={
     RenderFashion: async(req,res)=>{
         try {
-            const Fashions= await Fashion.find().sort({_id: -1}).limit(10);
+            const Fashions= await Fashion.find({ isdeleted: { $ne: true } }).sort({_id: -1}).limit(10);
             res.render('Admin/Fashion',{layout:"adminlayout",Data:Fashions})
         } catch (error) {
             console.log(error);
@@ -67,7 +67,7 @@ module.exports={
         try {
             console.log("llllll");
             const id = req.params.id
-            await Fashion.findByIdAndDelete(id)
+            await Fashion.updateOne({ _id: id }, { $set: { isdeleted: true } });
             console.log("Deleted Successfully");
             res.redirect('/admin/Fashion')
         } catch (error) {

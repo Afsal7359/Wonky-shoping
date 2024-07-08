@@ -7,8 +7,8 @@ module.exports={
     RenderProductPage:async(req,res)=>{
         try {
             const Data = await Product.find().sort({_id: -1})  .populate('category').populate('fashion');
-            const category= await Category.find();
-            const FashionData = await Fashion.find().sort({_id: -1})
+            const category= await Category.find({ isdeleted: { $ne: true } });
+            const FashionData = await Fashion.find({ isdeleted: { $ne: true } }).sort({_id: -1})
             res.render('Admin/Product',{layout:"adminlayout",Data,category,FashionData})
         } catch (error) {
             console.log(error);

@@ -10,7 +10,7 @@ module.exports = {
         try{
 
             const BannerData = await Banner.find().sort({_id: -1}).limit(5)
-            const FashionData = await Fashion.find().sort({_id: -1}).limit(10)
+            const FashionData = await Fashion.find({ isdeleted: { $ne: true } }).sort({_id: -1}).limit(10)
             const OfferData = await Offer.find().sort({_id: -1}).limit(10);
             const ProductData = await Product.find().sort({_id: -1}).limit(10)
         res.render('User/Home',{BannerData,FashionData,OfferData,ProductData})
@@ -21,8 +21,8 @@ module.exports = {
     },
     UserShopPage:async(req,res)=>{
         try {
-            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
-            const CategoryData = await Category.find().sort({_id: -1})
+            const FashionData = await Fashion.find({ isdeleted: { $ne: true } }).sort({_id: -1}).limit(3)
+            const CategoryData = await Category.find({ isdeleted: { $ne: true } }).sort({_id: -1})
             res.render('User/Shop',{data:CategoryData,FashionData})
         } catch (error) {
             console.log(error);
@@ -34,7 +34,7 @@ module.exports = {
             const data = await Product.find({code:id})
             // console.log(data[0].size[0],"ssssssssssiiiiiiiiii");
             console.log(data,"data");
-            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
+            const FashionData = await Fashion.find({ isdeleted: { $ne: true } }).sort({_id: -1}).limit(3)
             res.render('User/Product-details',{layout:"layout",data,FashionData})
         } catch (error) {
             console.log(error);
@@ -43,7 +43,7 @@ module.exports = {
    
     UserContactPage :async(req,res)=>{
         try {
-            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
+            const FashionData = await Fashion.find({ isdeleted: { $ne: true } }).sort({_id: -1}).limit(3)
             res.render('User/Contact',{FashionData})
         } catch (error) {
             console.log(error);
@@ -51,7 +51,7 @@ module.exports = {
     },
     UserCartPage :async(req,res)=>{
         try {
-            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
+            const FashionData = await Fashion.find({ isdeleted: { $ne: true } }).sort({_id: -1}).limit(3)
             console.log("hhhhhhhhhhh");
             res.render('User/Cart',{FashionData})
         } catch (error) {
@@ -70,7 +70,7 @@ module.exports = {
             console.log(categoryname,"catgeory namee");
             console.log(id,"idddddddddddddd");
             console.log(data,"dataa");
-            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
+            const FashionData = await Fashion.find({ isdeleted: { $ne: true } }).sort({_id: -1}).limit(3)
             res.render('User/Product',{data,categoryname,FashionData})
         } catch (error) {
             console.log(error);
@@ -86,7 +86,7 @@ module.exports = {
                 var categoryname  = data[0].fashion.heading
             }
             console.log(data,"data");
-            const FashionData = await Fashion.find().sort({_id: -1}).limit(3)
+            const FashionData = await Fashion.find({ isdeleted: { $ne: true } }).sort({_id: -1}).limit(3)
             res.render('User/Product',{data,FashionData,categoryname})
         } catch (error) {
             console.log(error);

@@ -4,7 +4,7 @@ const cloudinary = require("../util/cloudinary");
 module.exports={
     RenderCategoryPage :async(req,res)=>{
         try {
-            const Categorys = await Category.find().sort({_id:-1})
+            const Categorys = await Category.find({ isdeleted: { $ne: true } }).sort({_id:-1})
             res.render('Admin/Category',{layout:"adminlayout",Data:Categorys})
         } catch (error) {
             res.status(500).json({message:"server error"})
@@ -65,7 +65,7 @@ module.exports={
     DeleteCategory : async(req,res)=>{
         try {
             const id = req.params.id
-            await Category.findByIdAndDelete(id)
+            await Category.updateOne({ _id: id }, { $set: { isdeleted: true } });
             console.log("Deleted Successfully");
             res.redirect('/admin/Category')
         } catch (error) {

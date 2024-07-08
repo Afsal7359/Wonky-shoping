@@ -15,7 +15,8 @@ const BannerSchema = new mongoose.Schema({
         type:String,
         required:true,
         trim:true
-    }
+    },
+    
 })
 
 const Banner = mongoose.model('Banner',BannerSchema)
