@@ -150,21 +150,26 @@
                 return;
             }
 
-            let message = 'Order Details:%0A';
+            let message = `Order Details \n`;
             cart.forEach(item => {
-                message += `Product: ${item.name}%0A`;
-                message += `Product Code: ${item.code}%0A`;
-                message += `Price: ₹${item.price}%0A`;
-                message += `Quantity: ${item.quantity}%0A`;
-                message += `Size: ${item.size}%0A`;
-                message += `Total: ₹${item.price * item.quantity}%0A%0A`;
+                message += `Product: ${item.name}\n`;
+                message += `Product Code: ${item.code}\n`;
+                message += `Price: ₹${item.price}\n`;
+                message += `Quantity: ${item.quantity}\n`;
+                message += `Size: ${item.size}\n`;
+                message += `Total: ₹${item.price * item.quantity}\n\n`;
             });
-         
-            message += `Total: ${totalElement.textContent}`;
+            message += `Grand Total: ${totalElement.textContent}`;
 
-            let whatsappUrl = `https://wa.me/7012060213?text=${message}`;
+            // Encode the message
+            let encodedMessage = encodeURIComponent(message);
+
+            console.log(encodedMessage, "encodedMessage");
+
+            let whatsappUrl = `https://wa.me/7012060213?text=${encodedMessage}`;
             window.open(whatsappUrl, '_blank');
             localStorage.removeItem('cart');
+            window.location.href='/'
         });
 
         // Load cart items on page load
