@@ -6,7 +6,7 @@ const cloudinary = require("../util/cloudinary");
 module.exports={
     RenderProductPage:async(req,res)=>{
         try {
-            const Data = await Product.find().sort({_id: -1})  .populate('category').populate('fashion');
+            const Data = await Product.find().sort({_id: -1}).populate('category').populate('fashion');
             const category= await Category.find({ isdeleted: { $ne: true } });
             const FashionData = await Fashion.find({ isdeleted: { $ne: true } }).sort({_id: -1})
             res.render('Admin/Product',{layout:"adminlayout",Data,category,FashionData})
