@@ -41,7 +41,7 @@ router.post('/edit-Category/:id',adminauth.adminauth,upload.single("image"),admi
 router.get('/delete-Category/:id',adminauth.adminauth,category.DeleteCategory);
 
 //Product
-router.get('/Product',adminauth.adminauth,Product.RenderProductPage);
+router.get('/Product',Product.RenderProductPage);
 router.post('/Add-Product',adminauth.adminauth,upload.array("image"),adminauth.adminauth,Product.AddProduct);
 router.post('/edit-product/:id',adminauth.adminauth,upload.array("image"),adminauth.adminauth,Product.EditProduct);
 router.get('/delete-Product/:id',adminauth.adminauth,Product.DeleteProduct);

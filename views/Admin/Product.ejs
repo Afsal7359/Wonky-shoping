@@ -209,95 +209,87 @@
 
    
    
-   <% for (let i = 0; i < Data.length; i++) { %>
-    <% let item = Data[i]; %>
-    <div id="modaldemo2_<%= i %>" class="modal fade">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="edit-product/<%= item._id %>" id="inputForm" method="POST" enctype="multipart/form-data">
-                    <div class="modal-body">
-                        <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder=" product Name " value="<%= item.name %>" name="name" id="heading" >
-                        </div>
-                        
-                        <div class="form-group">
-                            <input type="text" class="form-control" placeholder=" description" value="<%= item.description %>" name="description" id="latprodescription" >
-                        </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control" placeholder=" Mrp" value="<%= item.mrp %>" name="mrp" id="latprodescription" >
-                        </div>
-                        <div class="form-group">
-                            <input type="number" class="form-control" placeholder=" Price" value="<%= item.price %>" name="price" id="latprodescription" >
-                        </div>
-                        <div class="form-group">
-                            <select name="fashion" id="fashion"  class="form-control select" required>
-                                <option value="<%=item.fashion._id%>"><%=item.fashion.heading%></option>
-                                <% for(i = 0; i < FashionData.length;i++){%>
-                                    <% let item = FashionData[i]%>
-                                    <option value="<%=item._id%>">
-                                        <%=item.heading%>
-                                    </option>
-                                <%}%>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <select name="category" id="category"  class="form-control select" required>
-                                <option value="<%=item.category._id%>"><%=item.category.heading%></option>
-                                <% for(i = 0; i < category.length;i++){%>
-                                    <% let item = category[i]%>
-                                    <option value="<%=item._id%>">
-                                        <%=item.heading%>
-                                    </option>
-                                <%}%>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <div id="inputContainers">
-                            <div class="input-group">
-                                <input type="text" placeholder="size" class="form-control" name="size[]" required autocomplete="off">
-                                <div class="input-group-append">
-                                  <button type="button" class="btn btn-success" onclick="editInputField()">Add</button>
-                                  <button type="button" class="btn btn-danger" onclick="deleteInputFields(this)">Delete</button>
-                                </div>
-                              </div>
-                              </div>
-                        </div>
-                        
-                        <div id="image-container">
-                            <% for (let i = 0; i < item.image.length; i++) { %>
-                              <div class="image-wrapper" id="image-wrapper-<%= i %>">
-                                <img src="<%= item.image[i] %>" id="selectedImage<%= i %>" style="height: 14em;">
-                                <!-- <div class="form-group">
-                                  <input class="form-control" placeholder="banner image" id="formFileLg_<%= i %>" name="image" type="file" onchange="updateImagePreview(this, 'selectedImage<%= i %>')">
-                                </div> -->
-                                <input type="hidden" name="image" value="<%= item.image[i] %>">
-                                <button class=" btn-danger" type="button" onclick="removeImage('<%= i %>')">Click to Remove Image</button>
-                              </div>
-                            <% } %>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="banner image" id="formFileLg_<%= i %>" multiple name="image" type="file" onchange="updateImagePreview(this, 'selectedImage<%= i %>')">
-                              </div>
-                          </div>
-                          <!-- <div class="form-group">
-                            <label for="newImage">Add New Image:</label>
-                            <input class="form-control" id="newImage" name="newImage" multiple type="file" onchange="addNewImage(this)">
-                          </div> -->
-                          
-                          
-                        <button class="btn btn-primary btn-block mt-5" type="submit">Save</button>
-                    </div>
-                </form><!-- modal-body -->
-            </div><!-- modal-content -->
-        </div><!-- modal-dialog -->
-    </div><!-- edit modal close -->
-
-    <% } %>
     <% for (let i = 0; i < Data.length; i++) { %>
         <% let item = Data[i]; %>
+        <div id="modaldemo2_<%= i %>" class="modal fade">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="edit-product/<%= item._id %>" id="inputForm_<%= i %>" method="POST" enctype="multipart/form-data">
+                        <div class="modal-body">
+                            <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Product Name" value="<%= item.name %>" name="name" id="name_<%= i %>" >
+                            </div>
+                            
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Description" value="<%= item.description %>" name="description" id="description_<%= i %>" >
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" placeholder="MRP" value="<%= item.mrp %>" name="mrp" id="mrp_<%= i %>" >
+                            </div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" placeholder="Price" value="<%= item.price %>" name="price" id="price_<%= i %>" >
+                            </div>
+                            <div class="form-group">
+                                <select name="fashion" id="fashion_<%= i %>" class="form-control select" required>
+                                    <option value="<%= item.fashion._id %>"><%= item.fashion.heading %></option>
+                                    <% for (let j = 0; j < FashionData.length; j++) { %>
+                                        <% let fashionItem = FashionData[j]; %>
+                                        <option value="<%= fashionItem._id %>">
+                                            <%= fashionItem.heading %>
+                                        </option>
+                                    <% } %>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select name="category" id="category_<%= i %>" class="form-control select" required>
+                                    <option value="<%= item.category._id %>"><%= item.category.heading %></option>
+                                    <% for (let k = 0; k < category.length; k++) { %>
+                                        <% let categoryItem = category[k]; %>
+                                        <option value="<%= categoryItem._id %>">
+                                            <%= categoryItem.heading %>
+                                        </option>
+                                    <% } %>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div id="inputContainers_<%= i %>">
+                                    <div class="input-group">
+                                        <input type="text" placeholder="Size" class="form-control" name="size[]" required autocomplete="off">
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-success" onclick="editInputField('<%= i %>')">Add</button>
+                                            <button type="button" class="btn btn-danger" onclick="deleteInputFields(this)">Delete</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div id="image-container_<%= i %>">
+                                <% for (let j = 0; j < item.image.length; j++) { %>
+                                    <div class="image-wrapper" id="image-wrapper-<%= j %>">
+                                        <img src="<%= item.image[j] %>" id="selectedImage_<%= j %>" style="height: 14em;">
+                                        <input type="hidden" name="image" value="<%= item.image[j] %>">
+                                        <button class="btn btn-danger" type="button" onclick="removeImage('<%= j %>')">Click to Remove Image</button>
+                                    </div>
+                                <% } %>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Banner Image" id="formFileLg_<%= i %>" multiple name="image" type="file" onchange="updateImagePreview(this, 'selectedImage_<%= i %>')">
+                                </div>
+                            </div>
+                              
+                            <button class="btn btn-primary btn-block mt-5" type="submit">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+   
+    
+
+  
     <!-- Delete Modal -->
     <div id="modaldemo3_<%=i%>" class="modal fade">
         <div class="modal-dialog" role="document">
