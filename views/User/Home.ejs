@@ -40,7 +40,7 @@
                                 </p>
                             </div>
                       
-                           
+                          
                          
                         </div>
                     </div>
@@ -48,7 +48,10 @@
             </div>
         </div>
 
-
+        <video width="100%" autoplay muted loop playsinline>
+            <source src="assets/images/bonky/video1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
             
         <!-- shop area start -->
         <div class="shop-area ptb-90">
@@ -127,7 +130,7 @@
           <div class="blog-area pb-70">
             <div class="container-fluid">
                 <div class="section-title text-center mb-50">
-                    <h3 style="font: sans-serif;font-weight: 900;font-size: 2.5em;color: #000;">New Offers</h3>
+                    <h3 style="font: sans-serif;font-weight: 900;font-size: 2.5em;color: #000;">Cotton Collections</h3>
                     <!-- <p style="font-weight:900;color: black;font: 16px sans-serif;">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p> -->
                 </div>
                 <div class="row">
@@ -135,18 +138,25 @@
                         <div class="swiper-wrapper">
                     <% for(let i = 0; i < OfferData.length; i++){%>
                         <% let item = OfferData[i]; %>
-                    <div class="col-lg-4 col-md-6 col-sm-6 swiper-slide">
-                        <div class="single-blog mb-30">
-                            <a href="/shop">
-                                <img src="<%=item.image%>" style="height: 300px;width: 250px;" alt="">
-                            </a>
-                            <div class="blog-title">
-                                <span><%=item.heading%></span>
-                                <h3><a href="/shop"><%=item.description%></a></h3>
-                                <a href="/shop">read more</a>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-12 grid-item cat1 swiper-slide">
+                            <div class="shop hover-style mb-30">
+                                <div class="shop-img">
+                                    <div class="shop-single-img">
+                                        <a href="/<%=item.Product.code%>">
+                                            <img src="<%= item.Product.image[0] %>" alt="" style="height: 285px;width: 250px;" />
+                                        </a>
+                                        <!-- <div class="product-cart-3">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#productModal<%=i%>"><i class="pe-7s-look"></i></a>
+                                        </div> -->
+                                    </div>								
+                                    <div class="title-style-3 text-center">
+                                        <h3><a style="color: #000;" href="#"><%=item.Product.name%></a></h3>
+                                        <span class="new-price text-black">₹. <%=item.Product.price%></span>
+                                        <span class="old-price text-black">₹. <%=item.Product.mrp%></span>
+                                    </div>
+                                </div>							
                             </div>
                         </div>
-                    </div>
                    <%}%>
                         </div>
                         </div>

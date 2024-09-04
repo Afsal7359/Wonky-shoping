@@ -70,6 +70,7 @@
                             <table id="editable-responsive-table" class="table editable-table table-nowrap table-bordered table-edit wp-100">
                                 <thead>
                                     <tr>
+                                        <th>Add To Collections</th>
                                         <th>ID</th>
                                         <th>Name</th>
                                         <th>Image</th>
@@ -84,6 +85,7 @@
                                 <% for(let i = 0; i < Data.length;i++){%>
                                     <% let item = Data[i]%>
                                     <tr>
+                                            <td>  <a href="#" class="btn btn-success" data-bs-target="#modaldemo4_<%=i%>" data-bs-toggle="modal">Add To Collection </a></td>
                                             <td><%=item.code%></td>
                                             <td><%=item.name%></td>
                                             <td>
@@ -316,6 +318,30 @@
    </div>
 
     <!-- Delete Modal Close -->
+
+    <div id="modaldemo4_<%=i%>" class="modal fade">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+               
+                <div class="modal-body">
+                    <div class="modal-header" >
+                        <h5 class="modal-title" id="exampleModalLabel">Confirm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                       </div>
+                       <div class="modal-body">
+                        <p>Please Click Yes, to Add this product in Cotton Collection ?</p>
+                      </div>
+                      <div class="modal-footer">
+                       <button type="button" class="btn btn-secondary" id="close-modal">No</button>
+                        <a href="AddCollection/<%= item._id %>"  class="btn btn-danger" type="button">Yes</a>
+                       </div>
+            
+            </div><!-- modal-content -->
+        </div><!-- modal-dialog -->
+    </div>
+   </div>
 
 
 <% } %>

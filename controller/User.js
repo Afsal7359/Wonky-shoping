@@ -4,6 +4,7 @@ const Category = require("../Models/Category");
 const Fashion = require("../Models/Fashion");
 const Offer = require("../Models/Offer");
 const Product = require("../Models/Product");
+const Cotton = require("../Models/cotton");
 
 module.exports = {
     userHome: async(req, res)=>{
@@ -11,7 +12,10 @@ module.exports = {
 
             const BannerData = await Banner.find().sort({_id: -1}).limit(5)
             const FashionData = await Fashion.find({ isdeleted: { $ne: true } }).sort({_id: -1}).limit(10)
-            const OfferData = await Offer.find().sort({_id: -1}).limit(10);
+            // const OfferData = await Offer.find().sort({_id: -1}).limit(10);
+            const OfferData = await Cotton.find().populate('Product').sort({_id: -1}).limit(10)
+            console.log(OfferData,"offf");
+            
             const ProductData = await Product.find().sort({_id: -1}).limit(10)
         res.render('User/Home',{BannerData,FashionData,OfferData,ProductData})
         }catch (err){
