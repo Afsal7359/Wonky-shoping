@@ -21,7 +21,7 @@ module.exports={
             res.redirect('/admin/Fashion'); 
         } catch (error) {
             console.log(error);
-        }
+        } 
     },
     EditFashion : async(req,res)=>{
         try {

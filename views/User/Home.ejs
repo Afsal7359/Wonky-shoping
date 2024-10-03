@@ -100,17 +100,17 @@
                                 <div class="shop hover-style mb-30">
                                     <div class="shop-img">
                                         <div class="shop-single-img">
-                                            <a href="/<%=item.code%>">
-                                                <img src="<%= item.image[0] %>" alt="" style="height: 285px;width: 250px;" />
+                                            <a href="/<%=item.Product.code%>">
+                                                <img src="<%= item.Product.image[0] %>" alt="" style="height: 285px;width: 250px;" />
                                             </a>
                                             <!-- <div class="product-cart-3">
                                                 <a href="#" data-bs-toggle="modal" data-bs-target="#productModal<%=i%>"><i class="pe-7s-look"></i></a>
                                             </div> -->
                                         </div>								
                                         <div class="title-style-3 text-center">
-                                            <h3><a style="color: #000;" href="#"><%=item.name%></a></h3>
-                                            <span class="new-price text-black">₹. <%=item.price%></span>
-                                            <span class="old-price text-black">₹. <%=item.mrp%></span>
+                                            <h3><a style="color: #000;" href="#"><%=item.Product.name%></a></h3>
+                                            <span class="new-price text-black">₹. <%=item.Product.price%></span>
+                                            <span class="old-price text-black">₹. <%=item.Product.mrp%></span>
                                         </div>
                                     </div>							
                                 </div>

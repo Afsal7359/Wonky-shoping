@@ -9,6 +9,7 @@ const category = require("../controller/category");
 const Product = require("../controller/product");
 const adminauth = require("../middlewaer/adminauth");
 const Cotton = require("../controller/Cotton");
+const Features = require("../controller/Features");
 
 
 router.get('/wonky',adminauth.adminauth,Admin.RenderDashboard);
@@ -50,6 +51,10 @@ router.get('/delete-Product/:id',adminauth.adminauth,Product.DeleteProduct);
 router.get('/AddCollection/:id',Cotton.AddCottonCollections);
 router.get('/Cotton',Cotton.GetCottonCollections);
 router.get('/delete-Cotton/:id',Cotton.DeleteCottonCollection);
+
+router.get('/AddFeatured/:id',Features.AddFeatureCollections);
+router.get('/Featured',Features.GetFeatureCollections);
+router.get('/delete-Featured/:id',Features.DeleteFeatureCollection);
 
 
 module.exports=router;
