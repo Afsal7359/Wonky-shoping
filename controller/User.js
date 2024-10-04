@@ -40,7 +40,7 @@ module.exports = {
     UserProductDetailPage :async(req,res)=>{
         try {
             const id = req.params.id
-            const data = await Product.find({code:id})
+            const data = await Product.find({code:id, isdeleted: { $ne: true }})
             // console.log(data[0].size[0],"ssssssssssiiiiiiiiii");
             console.log(data,"data");
             const FashionData = await Fashion.find({ isdeleted: { $ne: true } }).sort({_id: -1}).limit(3)

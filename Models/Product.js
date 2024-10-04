@@ -42,6 +42,11 @@ const ProductSchema = new mongoose.Schema({
     fashion:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Fashion',
+    },
+    isdeleted:{
+        type:Boolean,
+        require:true,
+        default:false
     }
 })
 
